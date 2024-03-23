@@ -1,0 +1,78 @@
+﻿@model WebApplication1.Models.Cloth
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Cloth</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <input asp-for="Gender" class="form-control" />
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Item" class="control-label"></label>
+                <input asp-for="Item" class="form-control" />
+                <span asp-validation-for="Item" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantityXS" class="control-label"></label>
+                <input asp-for="QuantityXS" class="form-control" />
+                <span asp-validation-for="QuantityXS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantityS" class="control-label"></label>
+                <input asp-for="QuantityS" class="form-control" />
+                <span asp-validation-for="QuantityS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantityL" class="control-label"></label>
+                <input asp-for="QuantityL" class="form-control" />
+                <span asp-validation-for="QuantityL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantityXL" class="control-label"></label>
+                <input asp-for="QuantityXL" class="form-control" />
+                <span asp-validation-for="QuantityXL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantityXXL" class="control-label"></label>
+                <input asp-for="QuantityXXL" class="form-control" />
+                <span asp-validation-for="QuantityXXL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" accept="image/jpeg" class="form-control" multiple />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
