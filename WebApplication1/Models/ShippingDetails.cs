@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.CodeAnalysis;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication1.Models
 {
@@ -6,6 +9,7 @@ namespace WebApplication1.Models
     {
         [Key]
         public int Id { get; set; }
+        public int CartId { get; set; }
         [Required(ErrorMessage = "Укажите как вас зовут")]
         public string Name { get; set; }
 
@@ -30,7 +34,20 @@ namespace WebApplication1.Models
         public bool GiftWrap { get; set; }
 
         public string size { get; set; }
+        [ValidateNever]
         public string itemname { get; set; }
-        public virtual Cloth Cloth { get; set; }
+        public int quantity { get; set; }
+
+        public ShippingDetails()
+        {
+        }
+
+        public ShippingDetails(CartItem cartItem)
+        {
+            CartId = cartItem.Id;
+            itemname = cartItem.ProductName;
+            size = cartItem.size;
+            quantity = cartItem.Quantity;
+        }
     }
 }

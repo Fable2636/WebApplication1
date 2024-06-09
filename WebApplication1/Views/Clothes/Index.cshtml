@@ -22,22 +22,13 @@
                 @Html.DisplayNameFor(model => model.Item)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.QuantityXS)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantityS)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantityL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantityXL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantityXXL)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
             </th>
             <th></th>
         </tr>
@@ -55,22 +46,13 @@
                 @Html.DisplayFor(modelItem => item.Item)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.QuantityXS)
+                    @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.QuantityS)
+                    @Html.DisplayFor(modelItem => item.size)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.QuantityL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantityXL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantityXXL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                    @Html.DisplayFor(modelItem => item.Quantity)
             </td>
                 <td>
                     <img decoding="async" src="@("~/image/"+item.ImageName)" asp-append-version="true" width="100px" height="100px" />
@@ -86,7 +68,7 @@
                 else
                 {
                     <td>
-                        <a asp-action="AddCheckout" class="btn btn-primary" asp-route-id="@item.Id">Купить</a>
+                        <a class="btn btn-primary" asp-controller="Cart" asp-action="Add" asp-route-id="@item.Id">Add to cart</a>
                     </td>
                 }
             </tr>

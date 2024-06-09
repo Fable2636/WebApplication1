@@ -32,7 +32,12 @@ builder.Services.Configure<IdentityOptions>(opts =>
     opts.User.RequireUniqueEmail = true;
     opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
 });
-
+builder.Services.AddDistributedMemoryCache();// добавляем IDistributedMemoryCache
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.IsEssential = true;
+});
 // 2
 var app = builder.Build();
 
@@ -50,6 +55,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseSession();
 
 app.UseRouting();
 

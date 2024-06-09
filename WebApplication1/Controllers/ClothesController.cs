@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using WebApplication1.Data;
 using WebApplication1.Models;
 
@@ -64,7 +66,7 @@ namespace WebApplication1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Gender,Item,QuantityXS,QuantityS,QuantityL,QuantityXL,QuantityXXL,Price,ImageFile")] Cloth cloth)
+        public async Task<IActionResult> Create([Bind("Id,Name,Gender,Item,Quantity,size,Price,ImageFile")] Cloth cloth)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +110,7 @@ namespace WebApplication1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Gender,Item,QuantityXS,QuantityS,QuantityL,QuantityXL,QuantityXXL,Price")] Cloth cloth)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Gender,Item,Quantity,size,Price")] Cloth cloth)
         {
             if (id != cloth.Id)
             {
@@ -179,54 +181,6 @@ namespace WebApplication1.Controllers
         private bool ClothExists(int id)
         {
             return _context.Cloth.Any(e => e.Id == id);
-        }
-
-        public async Task<IActionResult> AddCheckout(int? id)
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var cloth = await _context.Cloth
-                    .FirstOrDefaultAsync(m => m.Id == id);
-                var shippingdetails = cloth;
-                if (shippingdetails == null)
-                {
-                    return NotFound();
-                }
-
-                return View(shippingdetails);
-            }
-            else 
-            {
-                return NotFound();
-            }
-                
-        }
-        public async Task<IActionResult> Checkout(int? id)
-        {
-            var cloth = await _context.Cloth.FindAsync(id);
-            return View();
-        }
-
-        public async Task<IActionResult> AdminCheckout()
-        {
-            return View(await _context.ShippingDetails.ToListAsync());
-        }
-
-        public async Task<IActionResult> AddCheckout1([Bind("Id,Name,Line1,Line2,Line3,City,Country,GiftWrap,size,itemname")] ShippingDetails shippingDetails)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(shippingDetails);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            
-            return View(shippingDetails);
         }
     }
 }

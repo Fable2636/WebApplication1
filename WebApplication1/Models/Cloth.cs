@@ -10,11 +10,8 @@ namespace WebApplication1.Models
         public string Name { get; set; }
         public string Gender { get; set; }
         public string Item { get; set; }
-        public int QuantityXS { get; set; }
-        public int QuantityS { get; set; }
-        public int QuantityL { get; set; }
-        public int QuantityXL { get; set; }
-        public int QuantityXXL { get; set; }
+        public int Quantity { get; set; }
+        public string size {  get; set; }
         public int Price { get; set; }
         [ValidateNever]
         [DisplayName("Image Name")]
@@ -22,7 +19,7 @@ namespace WebApplication1.Models
 
         [NotMapped]
         [DisplayName("Upload File")]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile ImageFile { get; set; } 
     }
 }
 
